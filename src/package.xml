@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mendix.com/package/1.0/">
+  <modelerProject xmlns="http://www.mendix.com/modelerProject/1.0/">
+    <module name="MathModule" />
+    <projectFile path="project.mpr" />
+    <files>
+      <file path="javasource\mathmodule\Misc.java" />
+      <file path="userlib\MathParser.org-mXparser-4.3.3.jar" />
+      <file path="javasource\mathmodule\actions\ConvertIntToBaseString.java" />
+      <file path="javasource\mathmodule\actions\RecursiveFunction.java" />
+      <file path="javasource\mathmodule\actions\ComplexExpression.java" />
+      <file path="javasource\mathmodule\actions\SimpleExpression.java" />
+      <file path="javasource\mathmodule\actions\ShowHelpText.java" />
+      <file path="javasource\mathmodule\actions\DecimalMovePoint.java" />
+    </files>
+  </modelerProject>
+</package>
