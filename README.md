@@ -1,7 +1,7 @@
-[![Support](https://img.shields.io/badge/Support-Community%20(no%20active%20support)-orange.svg)](https://docs.mendix.com/developerportal/app-store/app-store-content-support)
+[![Support](https://img.shields.io/badge/Support-Community-orange.svg)](https://docs.mendix.com/developerportal/app-store/app-store-content-support)
 [![Studio](https://img.shields.io/badge/Studio%20version-8.0%2B-blue.svg)](https://appstore.home.mendix.com/link/modeler/)
-![GitHub release](https://img.shields.io/github/release/JelteMX/mendix-math-module)
-![GitHub issues](https://img.shields.io/github/issues/JelteMX/mendix-math-module)
+[![GitHub release](https://img.shields.io/github/release/JelteMX/mendix-math-module)](https://github.com/JelteMX/mendix-math-module/releases/latest)
+[![GitHub issues](https://img.shields.io/github/issues/JelteMX/mendix-math-module)](https://github.com/JelteMX/mendix-math-module/issues)
 
 # Math Module for Mendix
 
