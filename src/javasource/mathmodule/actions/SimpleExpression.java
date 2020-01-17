@@ -13,6 +13,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import mathmodule.Misc;
+import mathmodule.proxies.SimpleExpressionResult;
 import org.mariuszgromada.math.mxparser.Expression;
 
 public class SimpleExpression extends CustomJavaAction<IMendixObject>
@@ -31,7 +32,7 @@ public class SimpleExpression extends CustomJavaAction<IMendixObject>
 		// BEGIN USER CODE
 		IContext ctx = this.getContext();
 		if (this.Expression == "" || this.Expression == null) {
-			return Misc.getExpressionError(ctx, "Expression cannot be empty");
+			return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), "Expression cannot be empty");
 		}
 		Expression simpleExpression = new Expression(this.Expression);
 		boolean syntaxValid = simpleExpression.checkSyntax();
@@ -42,15 +43,15 @@ public class SimpleExpression extends CustomJavaAction<IMendixObject>
 			boolean afterCalculateSatus = simpleExpression.checkSyntax();
 			if (afterCalculateSatus) {
 				if (Double.isNaN(expressionResult)) {
-					return Misc.getExpressionError(ctx, "Expression result is not a number");
+					return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), "Expression result is not a number");
 				}
-				return Misc.getExpressionResult(ctx, expressionResult);
+				return Misc.getSimpleExpressionResult(ctx, expressionResult);
 			} else {
-				return Misc.getExpressionError(ctx, simpleExpression.getErrorMessage());
+				return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), simpleExpression.getErrorMessage());
 			}
 
 		} else {
-			return Misc.getExpressionError(ctx, simpleExpression.getErrorMessage());
+			return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), simpleExpression.getErrorMessage());
 		}
 		// END USER CODE
 	}

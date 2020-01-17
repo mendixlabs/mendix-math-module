@@ -9,12 +9,12 @@
 
 package mathmodule.actions;
 
-import org.mariuszgromada.math.mxparser.Argument;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.mariuszgromada.math.mxparser.RecursiveArgument;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import mathmodule.Misc;
+import mathmodule.proxies.SimpleExpressionResult;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class RecursiveFunction extends CustomJavaAction<IMendixObject>
@@ -40,11 +40,11 @@ public class RecursiveFunction extends CustomJavaAction<IMendixObject>
 		IContext ctx = getContext();
 		
 		if (this.Function == null || this.Function == "") {
-			return Misc.getExpressionError(ctx, "Function cannot be empty");
+			return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), "Function cannot be empty");
 		} else if (this.ValueIndex0 == null || this.ValueIndex1 == null) {
-			return Misc.getExpressionError(ctx, "For the recursive function you will need a value for n=0 and n=1");
+			return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), "For the recursive function you will need a value for n=0 and n=1");
 		} else if (this.FunctionCall == null) {
-			return Misc.getExpressionError(ctx, "The function needs a function call");
+			return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), "The function needs a function call");
 		}
 		
 		RecursiveArgument recursive = new RecursiveArgument(this.Function);
@@ -59,20 +59,20 @@ public class RecursiveFunction extends CustomJavaAction<IMendixObject>
 			boolean expressionValid = expression.checkSyntax();
 			
 			if (!expressionValid) {
-				return Misc.getExpressionError(ctx, expression.getErrorMessage());
+				return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), expression.getErrorMessage());
 			}
 			
 			double value = expression.calculate();
 			
 			if (Double.isNaN(value)) {
-				return Misc.getExpressionError(ctx, "Function does not return a number");
+				return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), "Function does not return a number");
 			}
 			
 			// Not sure if needed, maybe clear up memory
 			recursive.resetAllCases();
-			return Misc.getExpressionResult(ctx, value);
+			return Misc.getSimpleExpressionResult(ctx, value);
 		} else {
-			return Misc.getExpressionError(ctx, recursive.getErrorMessage());
+			return Misc.getExpressionError(ctx, SimpleExpressionResult.getType(), recursive.getErrorMessage());
 		}
 		// END USER CODE
 	}

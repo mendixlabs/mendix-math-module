@@ -12,6 +12,7 @@
       <file path="javasource\mathmodule\actions\SimpleExpression.java" />
       <file path="javasource\mathmodule\actions\ShowHelpText.java" />
       <file path="javasource\mathmodule\actions\DecimalMovePoint.java" />
+      <file path="javasource\mathmodule\actions\ValidateComplexExpression.java" />
     </files>
   </modelerProject>
 </package>

@@ -9,9 +9,11 @@
 
 package mathmodule.actions;
 
+import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import mathmodule.Misc;
+import mathmodule.proxies.ComplexExpressionResult;
 import mathmodule.proxies.ExpressionUseEnum;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import org.mariuszgromada.math.mxparser.Expression;
@@ -43,7 +45,7 @@ public class ComplexExpression extends CustomJavaAction<IMendixObject>
 		IContext ctx = this.getContext();
 		
 		if (this.Expression == "" || this.Expression == null) {
-			return Misc.getExpressionError(ctx, "Expression cannot be empty");
+			return Misc.getExpressionError(ctx, ComplexExpressionResult.getType(), "Expression cannot be empty");
 		}
 		
 		Expression expression = new Expression(this.Expression);
@@ -59,14 +61,14 @@ public class ComplexExpression extends CustomJavaAction<IMendixObject>
 				Argument arg = new Argument(name, value.doubleValue());
 				expression.addArguments(arg);
 			} else if (enumeration.equals(ExpressionUseEnum.String.name()) && stringValue != null) {
-				double doubleValue = new Double(stringValue);
+				double doubleValue = Double.parseDouble(stringValue);
 				if (!Double.isNaN(doubleValue)) {
 					Argument arg = new Argument(name, doubleValue);
 					expression.addArguments(arg);
 				}
 			}
 		}
-		
+
 		boolean syntaxValid = expression.checkSyntax();
 		if (syntaxValid) {
 				
@@ -75,15 +77,31 @@ public class ComplexExpression extends CustomJavaAction<IMendixObject>
 			
 			if (afterCalculateSatus) {
 				if (Double.isNaN(expressionResult)) {
-					return Misc.getExpressionError(ctx, "Expression result is not a number");
+					return Misc.getExpressionError(ctx, ComplexExpressionResult.getType(), "Expression result is not a number");
 				}
-				return Misc.getExpressionResult(ctx, expressionResult);
+				return Misc.getComplexExpressionResult(ctx, expressionResult);
 			} else {
-				return Misc.getExpressionError(ctx, expression.getErrorMessage());
+				return Misc.getExpressionError(ctx, ComplexExpressionResult.getType(), expression.getErrorMessage());
 			}
 
 		} else {
-			return Misc.getExpressionError(ctx, expression.getErrorMessage());
+			String[] missingArguments = expression.getMissingUserDefinedArguments();
+			IMendixObject complexResult = Misc.getExpressionError(ctx, ComplexExpressionResult.getType(), expression.getErrorMessage());
+			
+			if (missingArguments.length > 0) {
+				String hasMissing = ComplexExpressionResult.MemberNames.HasMissingArguments.toString();
+				complexResult.setValue(ctx, hasMissing, true);
+				
+				for (int i = 0; i < missingArguments.length; i++) {
+					String missing = missingArguments[i];
+					IMendixObject missingObject = Core.instantiate(ctx, mathmodule.proxies.Argument.getType());
+					missingObject.setValue(ctx, mathmodule.proxies.Argument.MemberNames.ArgumentName.toString(), missing);
+					missingObject.setValue(ctx, mathmodule.proxies.Argument.MemberNames.Missing.toString(), complexResult.getId());
+					Core.commit(ctx, missingObject);
+				}
+			}
+			
+			return complexResult;
 		}
 		
 		// END USER CODE
