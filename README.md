@@ -35,6 +35,10 @@ Do you feel the need to do more complex calculations in Mendix, but see a lack i
 
 - **ConvertIntToBaseString** - Do you need to represent an Integer (base10) into another form, for example Octal (base8) or Hex (base16)?
 
+### Validation
+
+- **ValidateComplexExpression** - If you are saving a complex expression, for example for later use, you might want to validate this beforehand. Also, over association you can find the used arguments for this expression.
+
 ## Syntax
 
 The expressions and functions you write can use a whole range of built-in functions and constants. These can be found at [https://github.com/mariuszgromada/MathParser.org-mXparser#built-in-tokens](https://github.com/mariuszgromada/MathParser.org-mXparser#built-in-tokens)
