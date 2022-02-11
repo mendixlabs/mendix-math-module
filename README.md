@@ -47,7 +47,7 @@ The expressions and functions you write can use a whole range of built-in functi
 ## Libraries used
 
 - mXparser library
-    - Version 4.3.3
+    - Version 4.4.2
     - License: Simplified BSD - Mariusz Gromada
     - [link](https://github.com/mariuszgromada/MathParser.org-mXparser/blob/master/LICENSE.txt)
 
