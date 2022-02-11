@@ -5,14 +5,18 @@
     <projectFile path="project.mpr" />
     <files>
       <file path="javasource\mathmodule\Misc.java" />
-      <file path="userlib\MathParser.org-mXparser-4.3.3.jar" />
+      <file path="userlib\MathParser.org-mXparser-4.4.2.jar" />
       <file path="javasource\mathmodule\actions\ConvertIntToBaseString.java" />
+      <file path="javasource\mathmodule\actions\ValidateComplexExpression.java" />
       <file path="javasource\mathmodule\actions\RecursiveFunction.java" />
       <file path="javasource\mathmodule\actions\ComplexExpression.java" />
       <file path="javasource\mathmodule\actions\SimpleExpression.java" />
       <file path="javasource\mathmodule\actions\ShowHelpText.java" />
       <file path="javasource\mathmodule\actions\DecimalMovePoint.java" />
-      <file path="javasource\mathmodule\actions\ValidateComplexExpression.java" />
+      <file path="themesource\mathmodule\native\design-properties.json" />
+      <file path="themesource\mathmodule\native\main.js" />
+      <file path="themesource\mathmodule\web\design-properties.json" />
+      <file path="themesource\mathmodule\web\main.scss" />
     </files>
   </modelerProject>
 </package>
